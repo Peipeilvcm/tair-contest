@@ -1,0 +1,14 @@
+CC=gcc
+CXX=g++
+PLATFORM_LDFLAGS= -lpthread -lrt -lpmem
+LDFLAGS = -Wl,-R/usr/local/lib64
+PLATFORM_CCFLAGS= -std=gnu99
+PLATFORM_CXXFLAGS= -std=c++11 -w
+PROFILING_FLAGS=-O3
+INCLUDE_PATH = -I../
+LIBRARY = ../../lib/libengine.a
+
+default:
+	$(CXX) ./onceset.cpp $(LIBRARY) $(PLATFORM_CXXFLAGS) $(LDFLAGS) $(PLATFORM_LDFLAGS) $(PROFILING_FLAGS) $(INCLUDE_PATH) -o onceset
+	$(CXX) ./warmup.cpp $(LIBRARY) $(PLATFORM_CXXFLAGS) $(LDFLAGS) $(PLATFORM_LDFLAGS) $(PROFILING_FLAGS) $(INCLUDE_PATH) -o warmup
+	$(CXX) ./fulltest.cpp $(LIBRARY) $(PLATFORM_CXXFLAGS) $(LDFLAGS) $(PLATFORM_LDFLAGS) $(PROFILING_FLAGS) $(INCLUDE_PATH) -o fulltest
